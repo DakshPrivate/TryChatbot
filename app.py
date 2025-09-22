@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import random
 
 app = Flask(__name__)
+CORS(app)  # ✅ allow all origins
 
-# Simple mock NLP chatbot logic
 def simple_bot(message: str) -> str:
     message = message.lower()
     if "hello" in message or "hi" in message:
@@ -37,5 +38,4 @@ def chat():
     return jsonify({"response": bot_response})
 
 if __name__ == "__main__":
-    # Important for Render (listens on 0.0.0.0:5000)
     app.run(host="0.0.0.0", port=5000)
